@@ -2,16 +2,16 @@
 
 from PIL import Image
 import numpy as np
-from os.path import sep
+from .node import Node
 
 
-def build_binary_map(path):
+def build_binary_map(path) -> np.ndarray:
     """Builds a numpy array of 1s and 0s illustrating the map."""
     img = Image.open(path)
     return np.array(img)
 
 
-def reconstruct_path(start, end):
+def reconstruct_path(start: Node, end: Node) -> list[Node]:
     """Reconstruct path from start to end."""
     path = []
     current = end
@@ -26,8 +26,8 @@ def reconstruct_path(start, end):
         return []
 
 
-def get_neighbors(array, current, diagonals=True):
-    """Generator that yields all neighbors of a node."""
+def get_neighbors(array: np.ndarray, current: Node, diagonals: bool = True) -> list[tuple]:
+    """Produces a list of neighbors as coordinate tuples"""
     poschanges = [(0, 1), (0, -1), (1, 0), (-1, 0),
                   (1, 1), (1, -1), (-1, 1), (-1, -1)]
 
@@ -53,7 +53,7 @@ def get_neighbors(array, current, diagonals=True):
     return neighbors
 
 
-def draw_path(array, path, visited=None):
+def draw_path(array: np.ndarray, path: list[Node], visited=None):
     """Draw visited nodes and the path and display maze"""
     if visited:
         for pos in visited:

@@ -5,11 +5,9 @@ from pathfinding.node import AstarNode as Node
 import queue
 from heapq import heappush, heappop
 import pathfinding.mapping as mp
-from decorators import timer
 from math import sqrt
 
 
-@timer
 def astar(arr, start=None, end=None):
     """A* Search Algorithm on a 2D Matrix of ints.
 
