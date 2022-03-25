@@ -8,13 +8,12 @@ class Tests(unittest.TestCase):
 
     def test_get_neighbors(self):
         array = np.array([
-            [1, 0, 1],
-            [0, 0, 1],
-            [1, 0, 0]
+            [[0, 0, 0], [255, 255, 255], [0, 0, 0]],
+            [[255, 255, 255], [255, 255, 255], [0, 0, 0]],
+            [[0, 0, 0], [255, 255, 255], [255, 255, 255]]
         ])
 
         expected = [(0, 1), (1, 0), (2, 1), (2, 2)]
-
         actual = get_neighbors(array, Node(1, 1))
 
         self.assertCountEqual(expected, actual)
@@ -32,6 +31,6 @@ class Tests(unittest.TestCase):
         actual = reconstruct_path(start, end)
         self.assertListEqual(expected, actual)
 
-    def test_dfs():
+    def test_dfs(self):
         """TODO test Depth-First-Search."""
         assert True == False

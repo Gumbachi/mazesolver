@@ -27,7 +27,7 @@ def reconstruct_path(start, end):
 
 
 def get_neighbors(array, current, diagonals=True):
-    """Get neighbors of a single position."""
+    """Generator that yields all neighbors of a node."""
     poschanges = [(0, 1), (0, -1), (1, 0), (-1, 0),
                   (1, 1), (1, -1), (-1, 1), (-1, -1)]
 
@@ -35,7 +35,7 @@ def get_neighbors(array, current, diagonals=True):
     if not diagonals:
         poschanges = poschanges[:4]
 
-    width, height = array.shape
+    width, height, _ = array.shape
 
     neighbors = []
 
@@ -47,7 +47,7 @@ def get_neighbors(array, current, diagonals=True):
             continue
 
         # check for walls
-        if array[neighbor] == 0:
+        if np.any(array[neighbor]):
             neighbors.append(neighbor)
 
     return neighbors
@@ -63,6 +63,5 @@ def draw_path(array, path, visited=None):
         array[node.pos] = np.array([0, 255, 0])
 
     img = Image.fromarray(array)
-    img.show()
 
     return img

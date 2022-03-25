@@ -1,5 +1,8 @@
 import tkinter as tk
 from tkinter import filedialog
+from pathfinding.bfs import breadth_first_search
+
+from pathfinding.mapping import build_binary_map, draw_path
 
 
 def getmazefilepath():
@@ -10,13 +13,13 @@ def getmazefilepath():
     filetypes = [
         ("image", ".jpeg"),
         ("image", ".png"),
-        ("image", ".jpg"),
+        ("image", ".jpg")
     ]
 
     return filedialog.askopenfilenames(
         title='Open the maze image',
         filetypes=filetypes,
-        initialdir="%USERPROFILE%"
+        initialdir="./"
     )
 
 
@@ -33,8 +36,14 @@ def main():
         if not fp:
             continue
 
-        print(f"PROCESSSING {fp}")
+        array = build_binary_map(fp[0])
+        path, visited = breadth_first_search(array)
+        solution = draw_path(array, path, visited)
+
+        solution.show()
+        solution.save("./solved_mazes/solved_maze.png")
 
 
 if __name__ == "__main__":
     main()
+    input("PROGRAM ENDED")

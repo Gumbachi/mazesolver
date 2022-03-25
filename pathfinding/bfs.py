@@ -38,7 +38,7 @@ def breadth_first_search(arr, start=None, end=None):
             return mp.reconstruct_path(src, current), visited
 
         # get and add neighbors to queue
-        for neighbor in mp.get_neighbors(arr, current, True):
+        for neighbor in mp.get_neighbors(arr, current, False):
             # check if visited
             if visited[neighbor]:
                 continue
